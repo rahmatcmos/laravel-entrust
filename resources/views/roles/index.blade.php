@@ -17,7 +17,6 @@
 						<tr>
 							<th>#</th>
 							<th>Name</th>
-							<th>Display Name</th>
 							<th>Description</th>
 							<th>Actions</th>
 						</tr>
@@ -27,11 +26,13 @@
 							<tr>
 								<th>{{ $role->id }}</th>
 								<th>{{ $role->name }}</th>
-								<th>{{ $role->display_name }}</th>
 								<th>{{ $role->description }}</th>
 								<th>
-									<a href="">Edit</a>
-									<a href="">Delete</a>
+									<button type="button" class="btn btn-info btn-xs" data-toggle="modal" data-target=".permissions-modal">Permissions</button>								
+								</th>
+								<th>
+									<a class=""><i class="glyphicon glyphicon-pencil"></i></a>
+									<a class=""><i class="glyphicon glyphicon-trash"></i></a>
 								</th>
 							</tr>
 						@endforeach
@@ -40,4 +41,5 @@
 			</div>
 		</div>
 	</div>
+	@include('roles.permissions.modal')
 @stop

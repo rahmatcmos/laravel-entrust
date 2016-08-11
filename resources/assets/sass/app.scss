@@ -1,2 +1,12 @@
-// @import "node_modules/bootstrap-sass/assets/stylesheets/bootstrap";
+@import "bootstrap/bootstrap";
 
+@font-face {
+    font-family: "glyphicons";
+    font-style: normal;
+    font-weight: normal;
+    src: local("?"), url("/fonts/glyphicons-halflings-regular.woff") format("woff"), url("/fonts/glyphicons-halflings-regular.ttf") format("truetype");
+}
+
+body {
+	font-family: 'glyphicons';
+}
