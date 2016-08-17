@@ -24,16 +24,16 @@
 					<tbody>
 						@foreach ($roles as $role)
 							<tr>
-								<th>{{ $role->id }}</th>
-								<th>{{ $role->name }}</th>
-								<th>{{ $role->description }}</th>
-								<th>
-									<button type="button" class="btn btn-info btn-xs" data-toggle="modal" data-target=".permissions-modal">Permissions</button>								
-								</th>
-								<th>
+								<td>{{ $role->id }}</td>
+								<td>{{ $role->name }}</td>
+								<td>{{ $role->description }}</td>
+								<td>
+									<button type="button" class="btn btn-info btn-xs get-perms" role_id="{{ $role->id }}" data-toggle="modal" data-target=".permissions-modal">Permissions</button>								
+								</td>
+								<td>
 									<a class=""><i class="glyphicon glyphicon-pencil"></i></a>
 									<a class=""><i class="glyphicon glyphicon-trash"></i></a>
-								</th>
+								</td>
 							</tr>
 						@endforeach
 					</tbody>	
@@ -42,4 +42,36 @@
 		</div>
 	</div>
 	@include('roles.permissions.modal')
+@stop
+@section('scripts')
+<script>
+	$(document).on('ready', function(){
+		$('#select-perms').multiSelect({
+			selectableHeader: "<div class='custom-header'>Selectable items</div>",
+			selectionHeader: "<div class='custom-header'>Selection items</div>", 
+		});	
+
+		$('.get-perms').on('click', function(){
+            role_id = $(this).attr('role_id');
+	       	$.ajax({
+                url : '{{ URL::to("/perms/assigned") }}',
+                type : 'GET',
+                dataType: 'json',
+                data : {role_id: role_id}
+            }).done(function(data){
+            	console.log('Role id: ' + role_id);
+            	$.each(data.assign, function (index, value) {
+                	console.log(value.id, value.display_name);
+                	// $('#select-perms').append($('<option>', {
+                	// 	value: value.id,
+                	// 	text: value.display_name
+                	// }));
+                	$('#select-perms option[value="'+value.id+'"]').attr('selected', true);
+                }); 
+                $('#select-perms').multiSelect('refresh');
+            });            
+        });
+		
+	});
+</script>
 @stop

@@ -43,6 +43,7 @@ elixir(function(mix) {
     // Combine scripts
     mix.scripts([
             'js/jquery.js',
+            'js/jquery.multi-select.js',
             'js/bootstrap.js'
         ],
         'public/assets/js/app.js',
@@ -54,6 +55,7 @@ elixir(function(mix) {
 
 	mix.styles([
         'resources/assets/css/app.css',
+        'resources/assets/css/multi-select.css'
     ], 'public/assets/css/app.css', './');
 	// Version css
     mix.version('public/assets/css/app.css');

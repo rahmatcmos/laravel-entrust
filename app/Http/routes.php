@@ -18,15 +18,20 @@ Route::get('/', function () {
 
 
 Route::group(['middleware' => 'auth'], function () {
+    
     Route::group(['prefix' => 'users'], function () {
-   		Route::get('/create', ['as' => 'user_create','uses' => 'UsersController@create']);
-   		Route::post('/store', ['as' => 'user_store','uses' => 'UsersController@store']);
-   	});	
+        Route::get('/create', ['as' => 'user_create', 'uses' => 'UsersController@create']);
+        Route::post('/store', ['as' => 'user_store', 'uses' => 'UsersController@store']);
+    });
 
     Route::group(['prefix' => 'roles'], function () {
-        Route::get('/index' , ['as' => 'role_index', 'uses' => 'RolesController@index']);
+        Route::get('/', ['as' => 'role_index', 'uses' => 'RolesController@index']);
         Route::get('/create', ['as' => 'role_create', 'uses' => 'RolesController@create']);
-        Route::post('/store' , ['as' => 'role_store', 'uses' => 'RolesController@store']);
+        Route::post('/store', ['as' => 'role_store', 'uses' => 'RolesController@store']);
+    });
+
+    Route::group(['prefix' => 'perms'], function (){
+        Route::get('/assigned', 'PermissionsController@permsAssigned');
     });
 
 });

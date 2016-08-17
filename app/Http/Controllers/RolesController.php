@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests;
+use App\Permission;
 use App\Role;
 use Illuminate\Http\Request;
 
@@ -11,7 +12,8 @@ class RolesController extends Controller
 	public function index()
 	{
 		$roles = Role::all();
-		return view('roles.index', compact('roles'));
+        $permissions = Permission::all();
+		return view('roles.index', compact('roles', 'permissions'));
 	}
 
     public function create()

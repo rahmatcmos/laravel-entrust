@@ -74,5 +74,6 @@
 
     <!-- JavaScripts -->
     <script src="/assets/js/app.js"></script>
+    @yield('scripts')
 </body>
 </html>

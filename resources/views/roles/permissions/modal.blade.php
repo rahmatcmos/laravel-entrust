@@ -6,8 +6,13 @@
           <h4 class="modal-title">Permissions</h4>
     	</div>
     	<div class="modal-body">
-    		<select name="" id="">
-    		</select>
+    		<select multiple="multiple" id="select-perms">
+                @if ( isset($permissions))
+                    @foreach ($permissions as $permission)
+                        <option value="{{ $permission->id }}">{{ $permission->display_name }}</option>
+                    @endforeach
+                @endif
+            </select>
     	</div>
     </div>
   </div>
