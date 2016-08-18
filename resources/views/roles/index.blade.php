@@ -46,32 +46,68 @@
 @section('scripts')
 <script>
 	$(document).on('ready', function(){
+		$.ajaxSetup(
+		{
+		    headers:
+		    {
+		        'X-CSRF-Token': '{{ csrf_token() }}'
+		    }
+		});
+
 		$('#select-perms').multiSelect({
 			selectableHeader: "<div class='custom-header'>Selectable items</div>",
 			selectionHeader: "<div class='custom-header'>Selection items</div>", 
+
+			afterSelect: function(value){
+				$.ajax({
+					url: '{{ URL::to("/perms/assign") }}',
+					type: 'POST',
+					dataType: 'json',
+					data : {
+						permission_id: value[0],
+						role_id: role_id
+					}
+				}).done(function (data) {
+					console.log(data);
+				});
+			},
+
+			afterDeselect: function(value){
+				$.ajax({
+					url: '{{ URL::to("/perms/remove") }}',
+					type: 'DELETE',
+					dataType: 'json',
+					data: {
+						permission_id: value[0],
+						role_id: role_id
+					}
+				}).done(function (data) {
+					console.log(data);
+				});
+			}
+
 		});	
 
 		$('.get-perms').on('click', function(){
-            role_id = $(this).attr('role_id');
-	       	$.ajax({
+            role_id = $(this).attr('role_id');                              
+           	$.ajax({
                 url : '{{ URL::to("/perms/assigned") }}',
                 type : 'GET',
                 dataType: 'json',
                 data : {role_id: role_id}
             }).done(function(data){
-            	console.log('Role id: ' + role_id);
-            	$.each(data.assign, function (index, value) {
+            	console.log('Role id: ' + role_id);            	
+            	$.each(data.assigned, function (index, value) {
                 	console.log(value.id, value.display_name);
                 	// $('#select-perms').append($('<option>', {
                 	// 	value: value.id,
                 	// 	text: value.display_name
-                	// }));
+                	// }));                	
                 	$('#select-perms option[value="'+value.id+'"]').attr('selected', true);
-                }); 
-                $('#select-perms').multiSelect('refresh');
+                });                             
+                $('#select-perms').multiSelect('refresh');  
             });            
-        });
-		
-	});
+        });		         
+	}); //ready
 </script>
 @stop
