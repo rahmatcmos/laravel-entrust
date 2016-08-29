@@ -46,24 +46,13 @@ class UsersController extends Controller
 
     public function update(Request $request, User $user)
     {
-
-        //$user->update($request->only('name', 'email'));
-        //$role = Role::findOrFail($request->role);
-
-        //if user has role -> not change
-        //if user no has role ->removin actualy role and attach new role
-        // if (!$user->hasRole($role)) {
-        //     $actualyRole = $user->roles->first();
-        //     $user->detachRole($actualyRole);
-        //     $user->attachRole($role);
-        // }
         $roles = $user->roles;
         $user->detachRoles($roles);
 
         if ($request->roles) {
             foreach ($request->roles as $role_id) {
                 $role = Role::findOrFail($role_id);
-                $user->attachRole($role);                
+                $user->attachRole($role);
             }
         }
 

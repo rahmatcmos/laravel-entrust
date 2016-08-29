@@ -33,7 +33,7 @@ Route::group(['middleware' => 'auth'], function () {
         Route::post('/store', ['as' => 'role_store', 'uses' => 'RolesController@store']);
     });
 
-    Route::group(['prefix' => 'perms'], function (){
+    Route::group(['prefix' => 'perms'], function () {
         Route::get('/assigned', 'PermissionsController@permsAssigned');
         Route::post('/assign', 'PermissionsController@assign');
         Route::delete('/remove', 'PermissionsController@remove');
