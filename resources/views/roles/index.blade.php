@@ -4,7 +4,7 @@
 	<div class="container">
 		<div class="row">
 			<div style="margin-bottom: 50px">
-				<a class="pull-right btn btn-md btn-success">Create Role</a>				
+				<a href="{{ route('role_create')}}" class="pull-right btn btn-md btn-success">Create Role</a>				
 			</div>
 		</div>
 		<div class="panel panel-default">
@@ -18,6 +18,7 @@
 							<th>#</th>
 							<th>Name</th>
 							<th>Description</th>
+							<th>Permissions</th>
 							<th>Actions</th>
 						</tr>
 					</thead>

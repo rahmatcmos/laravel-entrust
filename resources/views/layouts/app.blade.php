@@ -12,6 +12,7 @@
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lato:100,300,400,700">
 
     <link href="{{ elixir('assets/css/app.css') }}" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-multiselect/0.9.13/css/bootstrap-multiselect.css">
 
     <style>
         body {
@@ -46,6 +47,8 @@
                 <!-- Left Side Of Navbar -->
                 <ul class="nav navbar-nav">
                     <li><a href="{{ url('/home') }}">Home</a></li>
+                    <li @if (Route::is('user_index')) class= 'active' @endif ><a href="{{ route('user_index') }}">Users</a></li>
+                    <li @if (Route::is('role_index')) class= 'active' @endif ><a href="{{ route('role_index') }}">Roles</a></li>
                 </ul>
 
                 <!-- Right Side Of Navbar -->
@@ -74,6 +77,7 @@
 
     <!-- JavaScripts -->
     <script src="/assets/js/app.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-multiselect/0.9.13/js/bootstrap-multiselect.min.js" charset="utf-8"></script>
     @yield('scripts')
 </body>
 </html>

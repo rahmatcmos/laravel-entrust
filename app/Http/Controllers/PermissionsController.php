@@ -12,7 +12,7 @@ class PermissionsController extends Controller
 	public function permsAssigned(Request $request)
 	{
 		$role = Role::findOrFail($request->role_id);
-		$perms = $role->perms;		
+		$perms = $role->perms;
 		$notAssigned = $this->permsNotAssigned($perms);
 		return response()->json([
 			'assigned' => $perms,
@@ -40,7 +40,7 @@ class PermissionsController extends Controller
 	{
 		$role = Role::findOrFail($request->role_id);
 		$permission = Permission::findOrFail($request->permission_id);
-		$role->detachPermission($request->permission_id);
+		$role->detachPermission($permission);
 
 		return response()->json([
 			'message' => 'Permission has been removed'

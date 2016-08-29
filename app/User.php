@@ -8,9 +8,9 @@ use Zizaco\Entrust\Traits\EntrustUserTrait;
 class User extends Authenticatable
 {
     /*
-     | This will enable the relation with Role and add the following methods roles(), hasRole($name), can($permission), and ability($roles, 
+     | This will enable the relation with Role and add the following methods roles(), hasRole($name), can($permission), and ability($roles,
      | $permissions, $options) within your User model.
-     */         
+     */
     use EntrustUserTrait;
 
     /**
@@ -28,6 +28,6 @@ class User extends Authenticatable
      * @var array
      */
     protected $hidden = [
-        'password', 'remember_token',
+    'password', 'remember_token',
     ];
 }
