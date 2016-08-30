@@ -4,7 +4,7 @@
 	<div class="container">
 		<div class="row">
 			<div style="margin-bottom: 50px">
-				<a href="{{ route('role_create')}}" class="pull-right btn btn-md btn-success">Create Role</a>				
+				<a href="{{ route('role_create')}}" class="pull-right btn btn-md btn-success">Create Role</a>
 			</div>
 		</div>
 		<div class="panel panel-default">
@@ -29,7 +29,7 @@
 								<td>{{ $role->name }}</td>
 								<td>{{ $role->description }}</td>
 								<td>
-									<button type="button" class="btn btn-info btn-xs get-perms" role_id="{{ $role->id }}" data-toggle="modal" data-target=".permissions-modal">Permissions</button>								
+									<button type="button" class="btn btn-info btn-xs get-perms" role_id="{{ $role->id }}" data-toggle="modal" data-target=".permissions-modal">Permissions</button>
 								</td>
 								<td>
 									<a class=""><i class="glyphicon glyphicon-pencil"></i></a>
@@ -37,7 +37,7 @@
 								</td>
 							</tr>
 						@endforeach
-					</tbody>	
+					</tbody>
 				</table>
 			</div>
 		</div>
@@ -46,6 +46,7 @@
 @stop
 @section('scripts')
 <script>
+
 	$(document).on('ready', function(){
 		$.ajaxSetup(
 		{
@@ -57,9 +58,9 @@
 
 		$('#select-perms').multiSelect({
 			selectableHeader: "<div class='custom-header'>Selectable items</div>",
-			selectionHeader: "<div class='custom-header'>Selection items</div>", 
+			selectionHeader: "<div class='custom-header'>Selection items</div>",
 
-			afterSelect: function(value){
+			afterSelect: function (value){
 				$.ajax({
 					url: '{{ URL::to("/perms/assign") }}',
 					type: 'POST',
@@ -73,7 +74,7 @@
 				});
 			},
 
-			afterDeselect: function(value){
+			afterDeselect: function (value){
 				$.ajax({
 					url: '{{ URL::to("/perms/remove") }}',
 					type: 'DELETE',
@@ -87,28 +88,29 @@
 				});
 			}
 
-		});	
+		});
 
 		$('.get-perms').on('click', function(){
-            role_id = $(this).attr('role_id');                              
+            role_id = $(this).attr('role_id');
+			$('#select-perms').multiSelect('refresh');
+			$('#select-perms option').attr('selected', false);
+
            	$.ajax({
                 url : '{{ URL::to("/perms/assigned") }}',
                 type : 'GET',
                 dataType: 'json',
                 data : {role_id: role_id}
             }).done(function(data){
-            	console.log('Role id: ' + role_id);            	
+            	console.log('Role id: ' + role_id);
+
             	$.each(data.assigned, function (index, value) {
                 	console.log(value.id, value.display_name);
-                	// $('#select-perms').append($('<option>', {
-                	// 	value: value.id,
-                	// 	text: value.display_name
-                	// }));                	
+
                 	$('#select-perms option[value="'+value.id+'"]').attr('selected', true);
-                });                             
-                $('#select-perms').multiSelect('refresh');  
-            });            
-        });		         
+                });
+				$('#select-perms').multiSelect('refresh');
+            });
+        });
 	}); //ready
 </script>
 @stop

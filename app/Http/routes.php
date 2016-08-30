@@ -19,12 +19,13 @@ Route::get('/', function () {
 
 Route::group(['middleware' => 'auth'], function () {
 
-    Route::group(['prefix' => 'users'], function () {
+    Route::group(['prefix' => 'users', 'middleware' => ['role:admin']], function () {
         Route::get('/', ['as' => 'user_index', 'uses' => 'UsersController@index']);
         Route::get('/create', ['as' => 'user_create', 'uses' => 'UsersController@create']);
         Route::post('/store', ['as' => 'user_store', 'uses' => 'UsersController@store']);
         Route::get('/edit/{user}', ['as' => 'user_edit', 'uses' => 'UsersController@edit']);
         Route::patch('/update/{user}', ['as' => 'user_update', 'uses' => 'UsersController@update']);
+        Route::delete('/{user}', ['as' => 'user_delete', 'uses' => 'UsersController@destroy']);
     });
 
     Route::group(['prefix' => 'roles'], function () {

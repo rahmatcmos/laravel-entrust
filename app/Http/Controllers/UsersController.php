@@ -2,9 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Requests;
 use App\Role;
 use App\User;
+use Illuminate\Support\Facades\Auth;
+use App\Http\Requests;
 use Illuminate\Http\Request;
 
 class UsersController extends Controller
@@ -56,7 +57,15 @@ class UsersController extends Controller
             }
         }
 
+        return back();
+    }
 
+    public function destroy(User $user)
+    {        
+        if (Auth::user()->can('delete_users')) {
+            $user->delete();
+            return redirect()->route('user_index');
+        }
 
         return back();
     }
