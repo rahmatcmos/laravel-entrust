@@ -47,8 +47,14 @@
                 <!-- Left Side Of Navbar -->
                 <ul class="nav navbar-nav">
                     <li><a href="{{ url('/home') }}">Home</a></li>
-                    <li @if (Route::is('user_index')) class= 'active' @endif ><a href="{{ route('user_index') }}">Users</a></li>
-                    <li @if (Route::is('role_index')) class= 'active' @endif ><a href="{{ route('role_index') }}">Roles</a></li>
+                    @role('admin')
+                        <li @if (Route::is('user_index')) class= 'active' @endif >
+                            <a href="{{ route('user_index') }}">Users</a>
+                        </li>
+                    @endrole
+                    <li @if (Route::is('role_index')) class= 'active' @endif >
+                        <a href="{{ route('role_index') }}">Roles</a>
+                    </li>
                 </ul>
 
                 <!-- Right Side Of Navbar -->

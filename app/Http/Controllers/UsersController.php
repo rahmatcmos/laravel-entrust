@@ -2,9 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Requests;
 use App\Role;
 use App\User;
+use Illuminate\Support\Facades\Auth;
+use App\Http\Requests;
 use Illuminate\Http\Request;
 
 class UsersController extends Controller
@@ -46,6 +47,13 @@ class UsersController extends Controller
 
     public function update(Request $request, User $user)
     {
+
+        $this->validate($request, [
+            'name'  => 'required',
+            'email' => 'required|email',
+            'roles'  => 'required',
+        ]);
+
         $roles = $user->roles;
         $user->detachRoles($roles);
 
@@ -56,8 +64,16 @@ class UsersController extends Controller
             }
         }
 
-
-
         return back();
+    }
+
+    public function destroy(User $user)
+    {
+        if (Auth::user()->can('delete_users')) {
+            $user->delete();
+            return redirect()->route('user_index');
+        }
+        $role->delete();
+        return redirect()->route('role_index');
     }
 }

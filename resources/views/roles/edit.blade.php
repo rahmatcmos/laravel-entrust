@@ -7,35 +7,26 @@
 				Create Role
 			</div>
 			<div class="panel-body">
-				<form action="{{ route('role_store') }}" method="post" class="form-horizontal">
+				<form action="{{ route('role_update', $role) }}" method="post" class="form-horizontal">
 					{{ csrf_field() }}
-					<div class="form-group {{ $errors->has('name') ? ' has-error' : '' }}">
+                    {{ method_field('PATCH') }}
+					<div class="form-group">
 						<label for="name" class="col-sm-2 control-label">Name:</label>
 						<div class="col-sm-10">
-							<input type="text" class="form-control" name="name">
-							@if ($errors->has('name'))
-                                <span class="help-block">
-                                    <strong>{{ $errors->first('name') }}</strong>
-                                </span>
-                            @endif
+							<input type="text" class="form-control" name="name" value="{{ $role->name }}" disabled>
 						</div>
 					</div>
-					<div class="form-group {{ $errors->has('display_name') ? 'has-error' : ''}}">
+					<div class="form-group">
 						<label for="display_name" class="col-sm-2 control-label">Display Name:</label>
 						<div class="col-sm-10">
-							<input type="text" class="form-control" name="display_name">
-							@if ($errors->has('display_name'))
-                                <span class="help-block">
-                                    <strong>{{ $errors->first('display_name') }}</strong>
-                                </span>
-                            @endif
+							<input type="text" class="form-control" name="display_name" value="{{ $role->display_name}}" disabled>
 						</div>
 					</div>
 					<div class="form-group {{ $errors->has('description') ? 'has-error' : ''}}">
 						<label for="description" class="col-sm-2 control-label">Description:</label>
 						<div class="col-sm-10">
-							<input type="text" class="form-control" name="description">
-							@if ($errors->has('description'))
+							<input type="text" class="form-control" name="description" value="{{old('description', $role->description)}}">
+                            @if ($errors->has('description'))
                                 <span class="help-block">
                                     <strong>{{ $errors->first('description') }}</strong>
                                 </span>
@@ -44,7 +35,7 @@
 					</div>
 					<div class="form-group">
 					    <div class="col-sm-offset-2 col-sm-10">
-					      <button type="submit" class="btn btn-success">Create</button>
+					      <button type="submit" class="btn btn-primary">Edit</button>
 					    </div>
 				  	</div>
 				</form>

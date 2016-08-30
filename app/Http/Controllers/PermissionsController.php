@@ -15,8 +15,7 @@ class PermissionsController extends Controller
         $perms = $role->perms;
         $notAssigned = $this->permsNotAssigned($perms);
         return response()->json([
-            'assigned' => $perms,
-            'notAssigned' => $notAssigned
+            'assigned' => $perms
         ]);
     }
 

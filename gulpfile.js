@@ -30,6 +30,12 @@ var elixir = require('laravel-elixir');
     gulp.src("vendor/bower_dl/bootstrap-sass/assets/javascripts/bootstrap.js")
         .pipe(gulp.dest("resources/assets/js/"));
 
+    gulp.src("vendor/bower_dl/sweetalert/dist/sweetalert.min.js")
+        .pipe(gulp.dest("resources/assets/js/"));
+
+    gulp.src("vendor/bower_dl/sweetalert/dist/sweetalert.css")
+        .pipe(gulp.dest("resources/assets/css/"));
+
     gulp.src("vendor/bower_dl/bootstrap-sass/assets /fonts/bootstrap/**")
     	.pipe(gulp.dest("public/assets/fonts"));
  });
@@ -44,18 +50,20 @@ elixir(function(mix) {
     mix.scripts([
             'js/jquery.js',
             'js/jquery.multi-select.js',
-            'js/bootstrap.js'
+            'js/bootstrap.js',
+            'js/sweetalert.min.js'
         ],
         'public/assets/js/app.js',
         'resources/assets'
     );
 
-	//Compile sass 
+	//Compile sass
 	mix.sass('app.scss', 'resources/assets/css/app.css');
 
 	mix.styles([
         'resources/assets/css/app.css',
-        'resources/assets/css/multi-select.css'
+        'resources/assets/css/multi-select.css',
+        'resources/assets/css/sweetalert.css'
     ], 'public/assets/css/app.css', './');
 	// Version css
     mix.version('public/assets/css/app.css');
