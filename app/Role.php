@@ -9,6 +9,9 @@ class Role extends EntrustRole
 {
     protected $fillable = ['name', 'display_name', 'description'];
 
+    //Class name must be a valid object or a string
+    //YOU CAN FIX IT WITH MASTER BRANCH OF ENTRUST
+
     /**
      * Many-to-Many relations with the user model.
      *
