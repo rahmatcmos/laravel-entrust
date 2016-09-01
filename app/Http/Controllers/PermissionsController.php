@@ -9,6 +9,11 @@ use Illuminate\Http\Request;
 
 class PermissionsController extends Controller
 {
+    /**
+     * Get permissions assigned.
+     * @param  Request $request
+     * @return JSON
+     */
     public function permsAssigned(Request $request)
     {
         $role = Role::findOrFail($request->role_id);
@@ -19,6 +24,11 @@ class PermissionsController extends Controller
         ]);
     }
 
+    /**
+     * Get permissions not assigned.
+     * @param  Collection $perms
+     * @return array
+     */
     public function permsNotAssigned($perms)
     {
         $permissions = Permission::all();
@@ -26,6 +36,11 @@ class PermissionsController extends Controller
         return $notAssigned->all();
     }
 
+    /**
+     * Attach permission to the role.
+     * @param  Request $request
+     * @return JSON
+     */
     public function assign(Request $request)
     {
         $role = Role::findOrFail($request->role_id);
@@ -35,6 +50,11 @@ class PermissionsController extends Controller
         ]);
     }
 
+    /**
+     * Remove the specified resource from storage.
+     * @param  Request $request
+     * @return JSON
+     */
     public function remove(Request $request)
     {
         $role = Role::findOrFail($request->role_id);

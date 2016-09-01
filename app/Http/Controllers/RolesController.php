@@ -10,6 +10,10 @@ use Illuminate\Support\Facades\Auth;
 
 class RolesController extends Controller
 {
+    /**
+     * Display a listing of the Roles.
+     * @return \Illuminate\Http\Response
+     */
     public function index()
     {
         $roles = Role::all();
@@ -17,11 +21,20 @@ class RolesController extends Controller
         return view('roles.index', compact('roles', 'permissions'));
     }
 
+    /**
+     * Show the form for creating a new Role.
+     * @return \Illuminate\Http\Response
+     */
     public function create()
     {
         return view('roles.create');
     }
 
+    /**
+     * Store a newly created resource in the storage.
+     * @param  Request $request
+     * @return \Illuminate\Http\Response
+     */
     public function store(Request $request)
     {
         $this->validate($request, [
@@ -31,14 +44,25 @@ class RolesController extends Controller
         ]);
 
         Role::create($request->all());
-        return redirect()->route('role_index');
+        return redirect()->route('role_index')->withSuccess('The Role has been created.');
     }
 
+    /**
+     * Show the form for editing the specified resource.
+     * @param  Role   $role
+     * @return \Illuminate\Http\Response
+     */
     public function edit(Role $role)
     {
         return view('roles.edit', compact('role'));
     }
 
+    /**
+     * Update the specified resource in storage.
+     * @param  Role    $role
+     * @param  Request $request
+     * @return \Illuminate\Http\Response
+     */
     public function update(Role $role, Request $request)
     {
         $this->validate($request, [
@@ -49,6 +73,11 @@ class RolesController extends Controller
         return back();
     }
 
+    /**
+     * Remove the specified resource from storage.
+     * @param  Role   $role
+     * @return \Illuminate\Http\Response
+     */
     public function destroy(Role $role)
     {
         if (!Auth::user()->can('delete_roles')) {

@@ -5739,6 +5739,9 @@ button.close {
 body {
   font-family: 'glyphicons'; }
 
+.ms-container {
+  width: auto; }
+
 /*# sourceMappingURL=app.css.map */
 
 .ms-container{

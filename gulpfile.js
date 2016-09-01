@@ -51,7 +51,8 @@ elixir(function(mix) {
             'js/jquery.js',
             'js/jquery.multi-select.js',
             'js/bootstrap.js',
-            'js/sweetalert.min.js'
+            'js/sweetalert.min.js',
+            'js/deleteItems.js'
         ],
         'public/assets/js/app.js',
         'resources/assets'
